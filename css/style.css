@@ -47,6 +47,10 @@ header {
   letter-spacing: 2px;
 }
 
+.logo img {
+  display: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -211,6 +215,7 @@ main h2 {
   }
 
   .logo img {
+    display: inline;
     width: 20px;
     position: relative;
     left: 0;
