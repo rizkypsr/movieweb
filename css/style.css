@@ -215,7 +215,7 @@ main h2 {
   }
 
   .logo img {
-    display: inline;
+    display: inline-block;
     width: 20px;
     position: relative;
     left: 0;
