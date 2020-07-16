@@ -1,17 +1,29 @@
 const hamburgerBtn = document.querySelector("#hamburgerBtn");
-const hamburgerBtnMoved = document.querySelector("#hamburgerBtn.move");
 const navbar = document.querySelector(".navbar");
+const modal = document.querySelector(".modal-container");
+const closeModalBtn = document.querySelector(".close");
+const username = document.querySelector("#username");
+const loginBtn = document.querySelector("#loginBtn");
+const unameInput = document.querySelector("#unameInput");
+
+window.addEventListener("load", () => {
+  let unameLocal = getUnameLocalStorage();
+  if (unameLocal != null) {
+    username.textContent = unameLocal;
+  } else {
+    showModalLogin();
+  }
+});
 
 hamburgerBtn.addEventListener("click", showNavbar);
+closeModalBtn.addEventListener("click", closeModal);
+username.addEventListener("click", showModalLogin);
+loginBtn.addEventListener("click", login);
 
 function showNavbar() {
   moveHamburgerPos();
 
-  if (hamburgerBtn.getAttribute("src") === "img/icons8-menu-30.png") {
-    hamburgerBtn.setAttribute("src", "img/icons8-multiply-24.png");
-  } else {
-    hamburgerBtn.setAttribute("src", "img/icons8-menu-30.png");
-  }
+  changeHamburgerBtn();
 
   navbar.classList.toggle("navbar-active");
 }
@@ -27,4 +39,35 @@ function moveHamburgerPos() {
   } else {
     hamburgerBtn.style.left = "";
   }
+}
+
+function changeHamburgerBtn() {
+  if (hamburgerBtn.getAttribute("src") === "img/icons8-menu-30.png") {
+    hamburgerBtn.setAttribute("src", "img/icons8-multiply-24.png");
+  } else {
+    hamburgerBtn.setAttribute("src", "img/icons8-menu-30.png");
+  }
+}
+
+function closeModal() {
+  modal.classList.remove("show-modal");
+}
+
+function showModalLogin() {
+  modal.classList.add("show-modal");
+}
+
+function login() {
+  let uname = unameInput.value;
+  setUnameLocalStorage(uname);
+}
+
+function setUnameLocalStorage(uname) {
+  localStorage.setItem("username", uname);
+  username.textContent = uname;
+}
+
+function getUnameLocalStorage() {
+  const uname = localStorage.getItem("username");
+  return uname;
 }
